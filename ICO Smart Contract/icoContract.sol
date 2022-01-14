@@ -155,7 +155,7 @@ contract icoContract is MyToken{
         uint noOfTokens = msg.value/icoTokenPrice;
 
         tokenBalance[msg.sender] += noOfTokens;
-        tokenBalance[tokenFounder] += noOfTokens;
+        tokenBalance[tokenFounder] -= noOfTokens;
 
         icoDeposit.transfer(msg.value);
 
@@ -164,7 +164,7 @@ contract icoContract is MyToken{
 
     }
 
-    function burnICOTokens() public returns(bool){
+    function burnICOTokens() public onlyManagerAccess returns(bool){
         icoCurrentState = getICOStateAsState();
         require(icoCurrentState == icoState.afterEnd,"ico has not yet ended");
         tokenBalance[tokenFounder] = 0;
