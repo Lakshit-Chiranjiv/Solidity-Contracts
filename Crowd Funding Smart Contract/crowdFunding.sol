@@ -82,14 +82,14 @@ contract CrowdFundingApp{
         Request storage req = requests[reqNo];
         require(req.voters[msg.sender]==false,"you have already voted for this request");
         req.voters[msg.sender] = true;
-        req.noOfContributors++;
+        req.noOfVoters++;
     }
 
     function grantFunds(uint reqNo) public{
         require(targetAmount <= raisedAmount,"target amount not raised yet");
         Request storage req = requests[reqNo];
         require(req.completed == false,"request has already been granted funds");
-        require(req.noOfVoters >= noOfContributors,"majority vote is not there");
+        require(req.noOfVoters >= (noOfContributors/2),"majority vote is not there");
         (bool sent, bytes memory data1) = payable(req.recipient).call{value : req.value}("");
         require(sent,"could not grant fund");
         req.completed = true;
