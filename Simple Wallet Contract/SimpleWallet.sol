@@ -12,6 +12,7 @@ contract SimpleWallet {
 
     //function to transfer/withdraw ether from contract to a given account
     function withdrawEther(address payable _to,uint _amount) public payable{
+        require(msg.sender == owner,"Only owner can withdraw ether!!");
         _to.transfer(_amount);
     }
 
