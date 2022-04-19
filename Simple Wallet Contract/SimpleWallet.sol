@@ -10,9 +10,13 @@ contract SimpleWallet {
         owner = msg.sender;
     }
 
-    //function to transfer/withdraw ether from contract to a given account
-    function withdrawEther(address payable _to,uint _amount) public payable{
+    modifier onlyOwner() {
         require(msg.sender == owner,"Only owner can withdraw ether!!");
+        _;
+    }
+
+    //function to transfer/withdraw ether from contract to a given account
+    function withdrawEther(address payable _to,uint _amount) public payable onlyOwner{
         _to.transfer(_amount);
     }
 
