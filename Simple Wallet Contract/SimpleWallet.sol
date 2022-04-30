@@ -4,8 +4,7 @@ pragma solidity >=0.7.0 <0.9.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/contracts/access/Ownable.sol";
 
-contract SimpleWallet is Ownable {
-
+contract Allowance is Ownable {
     // address payable public owner;
 
     // constructor(){
@@ -32,6 +31,9 @@ contract SimpleWallet is Ownable {
     function reduceAllowance(address _who,uint _amount) internal {
         allowance[_who] -= _amount;
     }
+}
+
+contract SimpleWallet is Allowance {
 
     //function to transfer/withdraw ether from contract to a given account
     //owner can withdraw unlimited amount and someone else can only withdraw allowed amount
