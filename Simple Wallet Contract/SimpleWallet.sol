@@ -7,7 +7,7 @@ contract SimpleWallet {
     address payable public owner;
 
     constructor(){
-        owner = msg.sender;
+        owner = payable(msg.sender);
     }
 
     modifier onlyOwner() {
@@ -21,7 +21,7 @@ contract SimpleWallet {
     }
 
     //fallback function to receive ether to contract
-    function receive() external payable{
+    receive() external payable{
 
     }
 }
