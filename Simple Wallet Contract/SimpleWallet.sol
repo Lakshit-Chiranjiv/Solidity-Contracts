@@ -29,9 +29,15 @@ contract SimpleWallet is Ownable {
         _;
     }
 
+    function reduceAllowance(address _who,uint _amount) internal {
+        allowance[_who] -= _amount;
+    }
+
     //function to transfer/withdraw ether from contract to a given account
     //owner can withdraw unlimited amount and someone else can only withdraw allowed amount
     function withdrawEther(address payable _to,uint _amount) public payable ownerOrAllowed(_amount){
+        if(!isOwner())
+            reduceAllowance(msg.sender,_amount);
         _to.transfer(_amount);
     }
 
