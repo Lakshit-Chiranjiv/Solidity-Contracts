@@ -39,17 +39,21 @@ contract Allowance is Ownable {
 
 contract SimpleWallet is Allowance {
 
+    event MoneyWithdrawn(address indexed _by,uint _amount);
+    event MoneyReceived(address indexed _by,uint _amount);
+
     //function to transfer/withdraw ether from contract to a given account
     //owner can withdraw unlimited amount and someone else can only withdraw allowed amount
     function withdrawEther(address payable _to,uint _amount) public payable ownerOrAllowed(_amount){
         require(_amount <= address(this).balance,"Not enough balance in wallet contract");
         if(!isOwner())
             reduceAllowance(msg.sender,_amount);
+        emit MoneyWithdrawn(msg.sender,_amount);
         _to.transfer(_amount);
     }
 
     //fallback function to receive ether to contract
     receive() external payable{
-
+        emit MoneyReceived(msg.sender,msg.value);
     }
 }
