@@ -55,6 +55,8 @@ contract SimpleWallet is Allowance {
         _to.transfer(_amount);
     }
 
+    //this function is part of Ownable contract through which we can set no one as the owner of contract
+    //overridden as we don't need it
     function renounceOwnership() public onlyOwner {
         revert("Can't renounce ownership here !!");
     }
