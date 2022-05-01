@@ -25,6 +25,10 @@ contract SimpleWallet is Allowance {
         revert("Can't renounce ownership here !!");
     }
 
+    function walletBalance() public view returns(uint){
+        return address(this).balance;
+    }
+
     //fallback function to receive ether to contract
     receive() external payable{
         emit MoneyReceived(msg.sender,msg.value);
