@@ -29,8 +29,8 @@ contract Allowance is Ownable {
     }
 
     modifier ownerOrAllowed(_amount) {
-        //isOwner function comes from the ownable smart contract and it checks if msg.sender is owner or not
-        require(isOwner() || allowance[msg.sender] >= _amount,"Not allowed to withdraw");
+        //owner function comes from the ownable smart contract and it returns the owner address
+        require(msg.sender==owner()  || allowance[msg.sender] >= _amount,"Not allowed to withdraw");
         _;
     }
 
