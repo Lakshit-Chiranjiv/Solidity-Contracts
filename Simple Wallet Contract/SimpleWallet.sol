@@ -16,7 +16,7 @@ contract Allowance is Ownable {
     //     _;
     // }
 
-    event AllowanceChanged(address _whose,address _byWhom,uint _oldAllowance,uint _newAllowance);
+    event AllowanceChanged(address indexed _whose,address indexed _byWhom,uint _oldAllowance,uint _newAllowance);
 
     mapping(address => uint) public allowance;
 
