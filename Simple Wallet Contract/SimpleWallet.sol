@@ -13,7 +13,7 @@ contract SimpleWallet is Allowance {
     //owner can withdraw unlimited amount and someone else can only withdraw allowed amount
     function withdrawEther(address payable _to,uint _amount) public payable ownerOrAllowed(_amount){
         require(_amount <= address(this).balance,"Not enough balance in wallet contract");
-        if(!isOwner())
+        if(msg.sender != owner())
             reduceAllowance(msg.sender,_amount);
         emit MoneyWithdrawn(msg.sender,_amount);
         _to.transfer(_amount);
@@ -21,7 +21,7 @@ contract SimpleWallet is Allowance {
 
     //this function is part of Ownable contract through which we can set no one as the owner of contract
     //overridden as we don't need it
-    function renounceOwnership() public onlyOwner {
+    function renounceOwnership() public override view onlyOwner {
         revert("Can't renounce ownership here !!");
     }
 
