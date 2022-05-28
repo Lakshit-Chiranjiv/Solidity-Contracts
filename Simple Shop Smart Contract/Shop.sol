@@ -6,4 +6,12 @@ contract Shop{
     address payable public owner;
     uint public itemCount;
     uint public salesAmount;
+
+    struct Item{
+        uint id;
+        string name;
+        uint price;
+        address itemOwner;
+        bool sold;
+    }
 }
