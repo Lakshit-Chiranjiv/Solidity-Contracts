@@ -31,4 +31,14 @@ contract Shop{
         itemCount++;
         itemList[itemCount] = Item(itemCount,_name,(_price * 1 ether),owner,false);
     }
+
+    function buyItem(uint _id) public payable{
+        require(_id>0 && _id<=itemCount,"Not a valid id");
+        require(itemList[_id].sold == false,"Item already sold");
+        require(msg.sender != owner,"Owner can't buy");
+        require(msg.value == itemList[_id].price,"Not the correct price");
+        itemList[_id].itemOwner = msg.sender;
+        itemList[_id].sold = true;
+        salesAmount += msg.value;
+    }
 }
