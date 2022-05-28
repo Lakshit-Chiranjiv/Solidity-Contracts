@@ -3,5 +3,7 @@
 pragma solidity >=0.7.0 <0.9.0;
 
 contract Shop{
-    
+    address payable public owner;
+    uint public itemCount;
+    uint public salesAmount;
 }
