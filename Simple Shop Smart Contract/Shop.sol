@@ -45,4 +45,10 @@ contract Shop{
     receive() external payable{
 
     }
+
+    function getSaleMoney() public onlyOwner payable{
+        require(address(this).balance > 0,"No sales balance");
+        owner.transfer(address(this).balance);
+        salesAmount = 0;
+    }
 }
