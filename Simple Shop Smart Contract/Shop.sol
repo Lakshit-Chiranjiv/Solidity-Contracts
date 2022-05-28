@@ -26,4 +26,9 @@ contract Shop{
         require(msg.sender == owner,"Only owner can call this function");
         _;
     }
+
+    function addItem(string memory _name,uint _price) onlyOwner public{
+        itemCount++;
+        itemList[itemCount] = Item(itemCount,_name,(_price * 1 ether),owner,false);
+    }
 }
