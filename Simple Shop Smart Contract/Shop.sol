@@ -16,4 +16,9 @@ contract Shop{
     }
 
     mapping(uint => Item) public itemList;
+
+    constructor(){
+        owner = payable(msg.sender);
+        itemCount = 0;//optional
+    }
 }
