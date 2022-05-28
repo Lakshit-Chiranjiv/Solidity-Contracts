@@ -41,4 +41,8 @@ contract Shop{
         itemList[_id].sold = true;
         salesAmount += msg.value;
     }
+
+    receive() external payable{
+
+    }
 }
