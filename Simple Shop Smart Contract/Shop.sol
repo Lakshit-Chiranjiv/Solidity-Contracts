@@ -14,4 +14,6 @@ contract Shop{
         address itemOwner;
         bool sold;
     }
+
+    mapping(uint => Item) public itemList;
 }
