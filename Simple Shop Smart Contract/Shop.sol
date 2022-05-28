@@ -21,4 +21,9 @@ contract Shop{
         owner = payable(msg.sender);
         itemCount = 0;//optional
     }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner,"Only owner can call this function");
+        _;
+    }
 }
