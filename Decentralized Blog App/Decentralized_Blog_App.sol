@@ -13,6 +13,14 @@ contract Decentralized_Blog_App{
         blogReadEarning = 1 ether;
     }
 
+    struct Blog{
+        uint blogId;
+        string blogTitle;
+        string blogBody;
+        uint numOfReads;
+        uint salePrice;
+    }
+
     mapping(uint => address) blogOwners;
 
 }
