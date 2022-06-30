@@ -35,4 +35,8 @@ contract Decentralized_Blog_App{
         blogCount++;
     }
 
+    function getAllBlogs() public view returns(Blog[] memory){
+        return blogList;
+    }
+
 }
