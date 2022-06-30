@@ -13,4 +13,6 @@ contract Decentralized_Blog_App{
         blogReadEarning = 1 ether;
     }
 
+    mapping(uint => address) blogOwners;
+
 }
