@@ -25,4 +25,8 @@ contract Decentralized_Blog_App{
 
     mapping(uint => address) blogOwners;
 
+    function readBlog(uint blogId) public {
+        payable(blogOwners[blogId]).transfer(blogReadEarning);
+    }
+
 }
