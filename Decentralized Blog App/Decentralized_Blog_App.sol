@@ -7,5 +7,9 @@ contract Decentralized_Blog_App{
     address payable contractOwner;
     uint blogReadEarning;
 
+    constructor() payable{
+        contractOwner = payable(msg.sender);
+        blogReadEarning = 1 ether;
+    }
 
 }
