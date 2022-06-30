@@ -39,4 +39,6 @@ contract Decentralized_Blog_App{
         return blogList;
     }
 
+    receive () external payable{} 
+
 }
