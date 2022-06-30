@@ -21,6 +21,8 @@ contract Decentralized_Blog_App{
         uint salePrice;
     }
 
+    Blog[] blogList;
+
     mapping(uint => address) blogOwners;
 
 }
