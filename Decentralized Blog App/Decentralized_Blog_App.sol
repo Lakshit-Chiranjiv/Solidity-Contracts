@@ -29,4 +29,10 @@ contract Decentralized_Blog_App{
         payable(blogOwners[blogId]).transfer(blogReadEarning);
     }
 
+    function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice) public{
+        blogList.push(Blog(blogCount,_blogTitle,_blogBody,0,_salePrice));
+        blogOwners[blogCount] = msg.sender;
+        blogCount++;
+    }
+
 }
