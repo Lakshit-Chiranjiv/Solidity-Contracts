@@ -49,6 +49,7 @@ contract Decentralized_Blog_App{
     }
 
     function removeBlogFromSale(uint blogId) public{
+        require(msg.sender == blogOwnersMap[blogId],"Only owner of blog can put it off sale");
         blogList[blogId].onSale = false;
     }
 
