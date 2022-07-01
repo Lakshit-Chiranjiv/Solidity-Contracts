@@ -37,7 +37,7 @@ contract Decentralized_Blog_App{
     function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public payable{
         require(msg.value == 1 ether,"It costs 1 ether to create a blog");
         require((_salePrice * 1 ether) > 1 ether,"Sale price should be more than 1 ether");
-        require(bytes(_blogTitle).length > 3,"Blog title length should be more than 0 characters");
+        require(bytes(_blogTitle).length > 3,"Blog title length should be more than 3 characters");
         blogList.push(Blog(blogCount,msg.sender,msg.sender,_blogTitle,_blogBody,0,(_salePrice * (1 ether)),_onSale));
         blogOwnersMap[blogCount] = msg.sender;
         blogCount++;
@@ -56,10 +56,11 @@ contract Decentralized_Blog_App{
     function buyBlog(uint blogId) public payable{
         require(msg.sender != blogOwnersMap[blogId],"Owner can't buy his/her own blog");
         require(blogList[blogId].onSale == true,"Blog is not on sale");
-        require((msg.value * (1 ether)) == blogList[blogId].salePrice,"Pay the exact blog sale amount to buy");
+        require(msg.value == blogList[blogId].salePrice,"Pay the exact blog sale amount to buy");
         payable(blogList[blogId].blogOwner).transfer(blogList[blogId].salePrice - (1 ether));
         payable(contractOwner).transfer(1 ether);
         blogList[blogId].blogOwner = msg.sender;
+        blogOwnersMap[blogId] = msg.sender;
     }
 
     function getABlog(uint blogId) public view returns(Blog memory){
