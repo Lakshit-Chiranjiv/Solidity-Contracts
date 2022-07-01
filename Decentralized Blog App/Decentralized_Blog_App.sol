@@ -15,6 +15,8 @@ contract Decentralized_Blog_App{
 
     struct Blog{
         uint blogId;
+        address blogOwner;
+        address blogCreator;
         string blogTitle;
         string blogBody;
         uint numOfReads;
@@ -31,7 +33,7 @@ contract Decentralized_Blog_App{
     }
 
     function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public{
-        blogList.push(Blog(blogCount,_blogTitle,_blogBody,0,_salePrice,_onSale));
+        blogList.push(Blog(blogCount,msg.sender,msg.sender,_blogTitle,_blogBody,0,_salePrice,_onSale));
         blogOwners[blogCount] = msg.sender;
         blogCount++;
     }
