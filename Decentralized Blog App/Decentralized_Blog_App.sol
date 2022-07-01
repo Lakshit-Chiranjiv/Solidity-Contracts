@@ -19,6 +19,7 @@ contract Decentralized_Blog_App{
         string blogBody;
         uint numOfReads;
         uint salePrice;
+        bool onSale;
     }
 
     Blog[] blogList;
@@ -29,8 +30,8 @@ contract Decentralized_Blog_App{
         payable(blogOwners[blogId]).transfer(blogReadEarning);
     }
 
-    function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice) public{
-        blogList.push(Blog(blogCount,_blogTitle,_blogBody,0,_salePrice));
+    function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public{
+        blogList.push(Blog(blogCount,_blogTitle,_blogBody,0,_salePrice,_onSale));
         blogOwners[blogCount] = msg.sender;
         blogCount++;
     }
