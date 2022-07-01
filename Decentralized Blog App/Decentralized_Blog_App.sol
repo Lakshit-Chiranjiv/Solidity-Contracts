@@ -46,6 +46,13 @@ contract Decentralized_Blog_App{
         blogList[blogId].onSale = false;
     }
 
+    function buyBlog(uint blogId) public payable{
+        //require msg.value for blog amount
+        payable(blogList[blogId].blogOwner).transfer(blogList[blogId].salePrice - (1 ether));
+        payable(contractOwner).transfer(1 ether);
+        blogList[blogId].blogOwner = msg.sender;
+    }
+
     function getABlog(uint blogId) public view returns(Blog memory){
         return blogList[blogId];
     }
