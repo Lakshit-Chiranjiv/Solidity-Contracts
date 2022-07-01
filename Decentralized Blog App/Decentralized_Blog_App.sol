@@ -29,7 +29,9 @@ contract Decentralized_Blog_App{
     mapping(uint => address) blogOwnersMap;
 
     function readBlog(uint blogId) public {
-        payable(blogOwnersMap[blogId]).transfer(blogReadEarning);
+        if(msg.sender != blogOwnersMap[blogId]){
+            payable(blogOwnersMap[blogId]).transfer(blogReadEarning);
+        }
     }
 
     function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public payable{
