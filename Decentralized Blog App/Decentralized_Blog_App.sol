@@ -40,6 +40,10 @@ contract Decentralized_Blog_App{
         blogList[blogId].onSale = true;
     }
 
+    function removeBlogFromSale(uint blogId) public{
+        blogList[blogId].onSale = false;
+    }
+
     function getAllBlogs() public view returns(Blog[] memory){
         return blogList;
     }
