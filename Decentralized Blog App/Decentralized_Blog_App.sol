@@ -26,15 +26,18 @@ contract Decentralized_Blog_App{
 
     Blog[] blogList;
 
-    mapping(uint => address) blogOwners;
+    mapping(uint => address) blogOwnersMap;
 
     function readBlog(uint blogId) public {
-        payable(blogOwners[blogId]).transfer(blogReadEarning);
+        payable(blogOwnersMap[blogId]).transfer(blogReadEarning);
     }
 
-    function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public{
-        blogList.push(Blog(blogCount,msg.sender,msg.sender,_blogTitle,_blogBody,0,_salePrice,_onSale));
-        blogOwners[blogCount] = msg.sender;
+    function createBlog(string memory _blogTitle,string memory _blogBody,uint _salePrice,bool _onSale) public payable{
+        require(msg.value == 1 ether,"It costs 1 ether to create a blog");
+        require((_salePrice * 1 ether) > 1 ether,"Sale price should be more than 1 ether");
+        require(bytes(_blogTitle).length > 3,"Blog title length should be more than 0 characters");
+        blogList.push(Blog(blogCount,msg.sender,msg.sender,_blogTitle,_blogBody,0,(_salePrice * (1 ether)),_onSale));
+        blogOwnersMap[blogCount] = msg.sender;
         blogCount++;
     }
 
